@@ -17,3 +17,15 @@
     background-color: rgb(17, 79, 122);
     color: white;
 }
+
+.win-modal{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: blue;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}

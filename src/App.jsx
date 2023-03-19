@@ -1,54 +1,70 @@
 import React from "react";
 import "App.css";
+import WinModal from "./WinModal";
 
 export default function App(){
-  let [player1, setPlayer1] = React.useState(true)
+  //State management
+    let [player1, setPlayer1] = React.useState(true)
 
-  let [gameState, setGameState] = React.useState({
-    row1:"",
-    row2:"",
-    row3:"",
-    column1:"",
-    column2:"",
-    column3:"",
-    diagonalToRight:"",
-    diagonalToLeft:""
-  })
+    let [gameState, setGameState] = React.useState({
+      row1:"",
+      row2:"",
+      row3:"",
+      column1:"",
+      column2:"",
+      column3:"",
+      diagonalToRight:"",
+      diagonalToLeft:""
+    })
 
+    let [gameEnded, setGameEnded] = React.useState([false, ""])
+  
+  //function to handle player action and game states
+    function handlePlayerChoice(e) {
+      if(player1){
+        e.target.innerHTML = "<span>x</span>"
 
-  function handlePlayerChoice(e) {
-    if(player1){
-      e.target.innerHTML = "<span>x</span>"
-
-      for (const key of Object.keys(gameState)) {
-        if(e.target.className.includes(key.toString())){
-          setGameState(previous => ({
-            ...previous,
-            [key]: gameState[key] += "x"
-          }))
+        for (const key of Object.keys(gameState)) {
+          if(e.target.className.includes(key.toString())){
+            setGameState(previous => ({
+              ...previous,
+              [key]: gameState[key] += "x"
+            }))
+          }
         }
       }
-    } 
-    else {
-      e.target.innerHTML = "<span>o<span>"
+      else {
+        e.target.innerHTML = "<span>o<span>"
 
-      for (const key of Object.keys(gameState)) {
-        if(e.target.className.includes(key.toString())){
-          setGameState(previous => ({
-            ...previous,
-            [gameState[key]]: gameState[key] += "o"
-          }))
+        for (const key of Object.keys(gameState)) {
+          if(e.target.className.includes(key.toString())){
+            setGameState(previous => ({
+              ...previous,
+              [key]: gameState[key] += "o"
+            }))
+          }
         }
       }
+
+      e.target.style.pointerEvents = "none"
+
+      setPlayer1(previous => !previous)
     }
 
+  //useEffect hook to check for a winner everytime gameState changes
+  React.useEffect(() => {
+    setTimeout(() => {
+      for (const key of Object.keys(gameState)) {
+            if(gameState[key] === "xxx"){
+              setGameEnded([true, "x"])
+            }
+            else if(gameState[key] === "ooo"){
+              setGameEnded([true, "o"])
+            }
+          }
+    }, 1300)
     
-
-    e.target.style.pointerEvents = "none"
-
-    setPlayer1(previous => !previous)
-    console.log(gameState)
-  }
+  }, [gameState])
 
   return(
     <section className="app">
@@ -66,6 +82,7 @@ export default function App(){
         </section>
         <h1>{player1 ? "Player 1" : "Player 2"}</h1>
       </main>
+      {gameEnded[0] && <WinModal winner={gameEnded[1]} />}
     </section>
   )
 }
