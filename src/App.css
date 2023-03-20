@@ -1,21 +1,127 @@
+body{
+    background-color: rgba(25, 42, 50, 1);
+}
+
 .app{
     width: 90vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     max-width: 500px;
-    background-color: red;
     margin: 20px auto;
 }
 
+/*-----HEADER-----*/
+.header{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.header__logo{
+    width: 30%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.header__logo--x{
+    color: rgba(49, 196, 190, 1);
+    font-size: 50px;
+    font-family: sans-serif;
+    font-weight: 800;
+    margin-right: 8px;
+    transform: translateY(-7px);
+}
+
+.header__logo--o{
+    color: rgba(242, 178, 55, 1);
+    font-size: 50px;
+    font-family: sans-serif;
+    font-weight: 800;
+    transform: translateY(-7px);
+}
+
+.header__player-turn{
+    width: 28%;
+    color: rgba(168, 190, 201, 1);
+    text-align: center;
+    background-color: rgba(31, 53, 64, 1);
+    box-shadow: 0 4px 0 0 rgba(16, 33, 41, 1);
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player{
+    font-size: 35px;
+    font-family: sans-serif;
+    font-weight: 800;
+    margin-right: 9px;
+    transform: translateY(-5px);
+}
+
+.turn{
+    font-family: sans-serif;
+    font-weight: 700;
+}
+
+.header__reset-button__container{
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.header__reset-button{
+    width: 40px;
+    height: 40px;
+    color: rgba(31, 53, 64, 1);
+    background-color: rgba(168, 190, 201, 1);
+    box-shadow: 0 4px 0 0 rgba(109, 138, 154, 1);
+}
+
 .game-board{
+    width: 100%;
     display: grid;
     grid-template: repeat(3, 1fr)/repeat(3, 1fr);
-    gap: 20px;
+    gap: 30px;
 }
 
 .input-container{
     width: 100%;
     aspect-ratio: 1/1;
-    background-color: rgb(17, 79, 122);
+    background-color: rgba(31, 53, 64, 1);
     color: white;
+    box-shadow: 0 10px 0 0 rgba(16, 33, 41, 1);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.x-choice{
+    color: rgba(49, 196, 190, 1);
+    font-size: 100px;
+    font-family: sans-serif;
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+    transform: translateY(-12px);
+}
+
+.o-choice{
+    color: rgba(242, 178, 55, 1);
+    font-size: 100px;
+    font-family: sans-serif;
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+    transform: translateY(-12px);
 }
 
 .win-modal{

@@ -22,7 +22,7 @@ export default function App(){
   //function to handle player action and game states
     function handlePlayerChoice(e) {
       if(player1){
-        e.target.innerHTML = "<span>x</span>"
+        e.target.innerHTML = "<span class='x-choice'>x</span>"
 
         for (const key of Object.keys(gameState)) {
           if(e.target.className.includes(key.toString())){
@@ -34,7 +34,7 @@ export default function App(){
         }
       }
       else {
-        e.target.innerHTML = "<span>o<span>"
+        e.target.innerHTML = "<span class='o-choice'>o<span>"
 
         for (const key of Object.keys(gameState)) {
           if(e.target.className.includes(key.toString())){
@@ -69,6 +69,24 @@ export default function App(){
   return(
     <section className="app">
       <main>
+        <section className="header">
+          <section className="header__logo">
+            <span className="header__logo--x">x</span>
+            <span className="header__logo--o">o</span>
+          </section>
+
+          {player1 ? 
+            <section className="header__player-turn"><span class="player">x</span><span class="turn">TURN</span></section>
+             : 
+            <section className="header__player-turn"><span class="player">o</span><span class="turn">TURN</span></section>
+          }
+
+          <section className="header__reset-button__container">
+            <button type="button" className="header__reset-button">{'\u21BB'}</button>
+          </section>
+          
+        </section>
+
         <section className="game-board">
           <section className="input-container row1 column1 diagonalToRight" onClick={e => handlePlayerChoice(e)}></section>
           <section className="input-container row1 column2" onClick={e => handlePlayerChoice(e)}></section>
@@ -80,7 +98,6 @@ export default function App(){
           <section className="input-container row3 column2" onClick={e => handlePlayerChoice(e)}></section>
           <section className="input-container row3 column3 diagonalToRight" onClick={e => handlePlayerChoice(e)}></section>
         </section>
-        <h1>{player1 ? "Player 1" : "Player 2"}</h1>
       </main>
       {gameEnded[0] && <WinModal winner={gameEnded[1]} />}
     </section>
